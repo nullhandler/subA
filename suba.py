@@ -1,3 +1,4 @@
+#!/usr/bin/python
 import struct
 import os
 import sys
@@ -49,7 +50,7 @@ if os.path.exists(sys.argv[-1]):
     #     print(ele['SubFileName'] + ele['ZipDownloadLink'])
     js = json.loads(req.content)
     subResponse = requests.get(js[0]['SubDownloadLink'], allow_redirects=True)
-    zipPath = os.path.dirname(sys.argv[-1]) + '/subA.zip'
+    zipPath = os.path.dirname(os.path.abspath(sys.argv[-1])) + '/subA.zip'
     print(zipPath)
     open(zipPath, 'wb').write(subResponse.content)
     with gzip.open(zipPath, 'rb') as f_in:
